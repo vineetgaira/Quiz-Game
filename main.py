@@ -1,13 +1,12 @@
 import requests
 import random
-from pprint import pprint
 import html
 import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
 
 
-URL = f"https://opentdb.com/api.php?amount=11&category=9&difficulty=easy&type=multiple"
+URL = "https://opentdb.com/api.php?amount=11&category=9&difficulty=easy&type=multiple"
 
 
 RESPONSE = requests.get(URL)
@@ -76,9 +75,6 @@ def play_quiz():
             else:
                 print(Fore.RED+"Please enter a y/n.")
                 continue
-
-        
-
-
+    
 if __name__=="__main__":
     play_quiz()
