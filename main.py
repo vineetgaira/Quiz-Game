@@ -2,66 +2,64 @@ import requests
 import random
 from pprint import pprint
 
-URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+
+URL = f"https://opentdb.com/api.php?amount=11&category=9&difficulty=easy&type=multiple"
+
 
 RESPONSE = requests.get(URL)
 DATA = RESPONSE.json()
 
 QUESTION = DATA["results"]
 
-
-
-
 def display_quesions():
 
-    for  question in QUESTION:
-        options = question["incorrect_answers"] + [question["correct_answer"]]
-
+    for question in QUESTION:
+        options = question['incorrect_answers'] +  [question['correct_answer']]
         random.shuffle(options)
 
-        print(question["question"])
+        print(question['question'])
 
         for i, option in enumerate(options, start=1):
-            print(f"{i}. {option}")
-        check_answer(options,question)
-        
+            print(f"{i}. {option}")    
 
-def get_user_answer():
+        get_user_answer(options,question['correct_answer'])    
+
+
+        
+def get_user_answer(options, correct_answer):
     valid_choices={1,2,3,4}
     while True:
         try:
-            choice = int(input("Choice: "))
+            choice=int(input("Enter your choice:"))
             if choice in valid_choices:
-                return choice
+                if options[choice-1]==correct_answer:
+                    print("Correct!")
+                    break
+                else:
+                    print("Wrong!")
+                    break
             else:
-                print("Please enter a valid choice.")
-                continue
+                print("Please select a valid option.")
         except ValueError:
-            print("Please enter a valid integer choice.")
-            continue
- 
-def check_answer(options,question):
-    choice=get_user_answer()
-    score=0
-    if options[choice - 1] == question["correct_answer"]:
-        print("Correct!")
-        score+=1
-        return score
-    else:
-        print("Wrong!")
-   
-                    
-def calculate_score():
-    score=check_answer()
+            print("Please select a valid option.")
+        
     
-    print("Your total score :\n" \
-    f"Score : {score}/10")
+
+def check_answer():
+    pass
+    
+ 
+def calculate_score():
+    pass
+
 
 def display_result():
     pass
+
 def play_quiz():
     display_quesions()
-    get_user_answer()
     calculate_score()
+
+
 if __name__=="__main__":
     play_quiz()
