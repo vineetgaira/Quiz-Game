@@ -12,8 +12,8 @@ DATA = RESPONSE.json()
 
 QUESTION = DATA["results"]
 
-def display_quesions(questions):
-
+def display_questions(questions):
+    score=0
     for question in questions:
         options = question['incorrect_answers'] +  [question['correct_answer']]
         random.shuffle(options)
@@ -23,7 +23,9 @@ def display_quesions(questions):
         for i, option in enumerate(options, start=1):
             print(f"{i}. {html.unescape(option)}")    
 
-        get_user_answer(options,question['correct_answer'])    
+        if get_user_answer(options,question['correct_answer']):
+            score+=1 
+    return score
 
 
         
@@ -34,11 +36,9 @@ def get_user_answer(options, correct_answer):
             choice=int(input("Enter your choice:"))
             if choice in valid_choices:
                 if options[choice-1]==correct_answer:
-                    print("Correct!")
-                    break
+                    return True
                 else:
-                    print("Wrong!")
-                    break
+                    return False
             else:
                 print("Please select a valid option.")
         except ValueError:
