@@ -59,9 +59,21 @@ def display_result():
     pass
 
 def play_quiz():
-    score=display_questions(QUESTION)
-    print(f"Your score is {score}/10")
-    
+    while True:
+        score=display_questions(QUESTION)
+        print(f"Your score is {score}/10")
+        while True:
+            user_exit=input("Do you wanna play another round(y/n):").lower()
+            if user_exit=="y":
+                break
+            elif user_exit=="n":
+                print("Thanks for quizzing....")
+                return
+            else:
+                print("Please enter a y/n.")
+                continue
+
+        
 
 
 if __name__=="__main__":
