@@ -16,9 +16,12 @@ def display_questions(questions):
     score=0
     for question in questions:
         options = question['incorrect_answers'] +  [question['correct_answer']]
+    
         random.shuffle(options)
 
-        print(html.unescape(question['question']))
+        for number,question in enumerate(questions,start=1):
+            print(f"\nQuestion {number}/{len(questions)}")
+            print(html.unescape(question['question']))
 
         for i, option in enumerate(options, start=1):
             print(f"{i}. {html.unescape(option)}")    
