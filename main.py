@@ -25,9 +25,10 @@ def display_questions(questions):
 
         if get_user_answer(options,question['correct_answer']):
             score+=1 
+            print("Correct!")
+        else:
+            print(f"Wrong! the correct answer was {question['correct_answer']}")
     return score
-
-
         
 def get_user_answer(options, correct_answer):
     valid_choices={1,2,3,4}
@@ -58,7 +59,8 @@ def display_result():
     pass
 
 def play_quiz():
-    display_questions(QUESTION)
+    score=display_questions(QUESTION)
+    print(f"Your score is {score}/10")
     
 
 
