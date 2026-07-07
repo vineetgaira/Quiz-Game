@@ -1,6 +1,7 @@
 import requests
 import random
 from pprint import pprint
+import html
 
 
 URL = f"https://opentdb.com/api.php?amount=11&category=9&difficulty=easy&type=multiple"
@@ -11,16 +12,16 @@ DATA = RESPONSE.json()
 
 QUESTION = DATA["results"]
 
-def display_quesions():
+def display_quesions(questions):
 
-    for question in QUESTION:
+    for question in questions:
         options = question['incorrect_answers'] +  [question['correct_answer']]
         random.shuffle(options)
 
-        print(question['question'])
+        print(html.unescape(question['question']))
 
         for i, option in enumerate(options, start=1):
-            print(f"{i}. {option}")    
+            print(f"{i}. {html.unescape(option)}")    
 
         get_user_answer(options,question['correct_answer'])    
 
@@ -57,8 +58,8 @@ def display_result():
     pass
 
 def play_quiz():
-    display_quesions()
-    calculate_score()
+    display_quesions(QUESTION)
+    
 
 
 if __name__=="__main__":
