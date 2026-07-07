@@ -58,7 +58,7 @@ def display_result():
     pass
 
 def play_quiz():
-    display_quesions(QUESTION)
+    display_questions(QUESTION)
     
 
 
