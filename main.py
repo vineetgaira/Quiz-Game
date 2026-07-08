@@ -74,6 +74,11 @@ def display_questions(url):
         print(Fore.RED+f"Error: {e}")
 
     questions = data["results"]
+
+    if not questions:
+        print(Fore.RED+"No questions were found please try a different setting.")
+        return 0
+    
     score=0
     for number,question in enumerate(questions,start=1):
         print(Fore.LIGHTBLUE_EX+f"\nQuestion {number}/{len(questions)}")
