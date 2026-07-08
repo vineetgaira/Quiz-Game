@@ -81,8 +81,17 @@ def play_quiz():
         url=create_url(amount,category,level,question_type)
         score=display_questions(url)
         percentage=score/amount*100
-        print(Fore.LIGHTGREEN_EX+f"Your score is {score}/{amount}")
-        print(Fore.LIGHTGREEN_EX+f"You correctly answered {percentage:.2f}% questions.")
+        if percentage>=90:
+            print(Fore.LIGHTGREEN_EX+"Excellent!")
+        elif percentage>=70 and percentage<90:
+            print(Fore.LIGHTGREEN_EX+"Great!")
+        elif percentage>=50 and percentage<70:
+            print(Fore.LIGHTGREEN_EX+"Good!")
+        elif percentage<=50:
+            print(Fore.LIGHTGREEN_EX+"Keep practicing!")
+
+        print(Fore.LIGHTGREEN_EX+f"Score : {score}/{amount}")
+        print(Fore.LIGHTGREEN_EX+f"Percentage : {percentage:.2f}%")
         
         while True:
             user_exit=input(Fore.LIGHTBLUE_EX+"Do you wanna play another round(y/n):").lower()
