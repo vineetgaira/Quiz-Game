@@ -25,7 +25,7 @@ CATEGORIES = {
     24: 32
 }
 
-DIFFICULTY={1: "easy",
+DIFFICULTY_LEVELS={1: "easy",
             2: "medium",
             3: "hard"}
 

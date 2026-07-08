@@ -4,7 +4,7 @@ import html
 import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
-from constants import CATEGORIES
+from constants import CATEGORIES, TYPE, DIFFICULTY_LEVELS
 from display_functions import multiple_categories, difficulty_level, type_questions
 
 
