@@ -12,51 +12,50 @@ from display_functions import multiple_categories, difficulty_level, type_questi
 def get_category():
     while True:
         try:
-            get_category=int(input("Please select a category :"))
+            get_category=int(input(Fore.BLUE+"Please select a category :"))
             if get_category in range(1,25):
                 return get_category
             else:
-                print("Please select a valid option..")
+                print(Fore.RED+"Please select a valid option..")
         except ValueError:
-            print("Pleae enter a valid option between 1-24.")
+            print(Fore.RED+"Pleae enter a valid option between 1-24.")
 
 def get_type():
     valid_choices={1,2}
     while True:
         try:
-            get_type=int(input("Please select a type :"))
+            get_type=int(input(Fore.BLUE+"Please select a type :"))
             if get_type in valid_choices:
                 return get_type
             else:
-                print("Please enter a valid option.")
+                print(Fore.RED+"Please enter a valid option.")
         except ValueError:
-            print("Pleae enter a number between 1-3.")
-
+            print(Fore.RED+"Pleae enter a number between 1-3.")
 
 def get_difficulty_level():
     valid_choices={1,2,3}
     while True:
         try:
-            get_level=int(input("Please select a difficulty level:"))
+            get_level=int(input(Fore.BLUE+"Please select a difficulty level:"))
             if get_level in valid_choices:
                 return get_level
             else:
-                print("Please enter a valid option.")
+                print(Fore.RED+"Please enter a valid option.")
         except ValueError:
-            print("Pleae enter a number between 1-3.")
+            print(Fore.RED+"Pleae enter a number between 1-3.")
     
 
 def get_questions_amount():
-    print("You can select a amount of questions between 5-50.")
+    print(Fore.BLUE+"You can select a amount of questions between 5-50.")
     while True:
         try:
-            give_amount=int(input("Please enter a amount of questions between 5-50:"))
+            give_amount=int(input(Fore.BLUE+"Please enter a amount of questions between 5-50:"))
             if give_amount in range(5,51):
                 return give_amount
             else:
-                print("Please enter a number between 5-50.")
+                print(Fore.RED+"Please enter a number between 5-50.")
         except ValueError:
-            print("Pleae enter a number between 5-50.")
+            print(Fore.RED+"Pleae enter a number between 5-50.")
 
 def url_modifier(amount,category,level,type):
     
@@ -66,9 +65,14 @@ def url_modifier(amount,category,level,type):
 
 
 def display_questions(url):
-    
-    response  = requests.get(url)
-    data = response.json()
+
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        print(Fore.RED+f"Error: {e}")
+
     questions = data["results"]
     score=0
     for number,question in enumerate(questions,start=1):
@@ -104,7 +108,6 @@ def get_user_answer(options, correct_answer):
                 print(Fore.RED+"Please select a valid option.")
         except ValueError:
             print(Fore.RED+"Please select a valid option.")
-
 
 def play_quiz():
     while True:
