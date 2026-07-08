@@ -80,7 +80,10 @@ def play_quiz():
         amount=get_questions_amount()
         url=create_url(amount,category,level,question_type)
         score=display_questions(url)
+        percentage=score/amount*100
         print(Fore.LIGHTGREEN_EX+f"Your score is {score}/{amount}")
+        print(Fore.LIGHTGREEN_EX+f"You correctly answered {percentage:.2f}% questions.")
+        
         while True:
             user_exit=input(Fore.LIGHTBLUE_EX+"Do you wanna play another round(y/n):").lower()
             if user_exit=="y":
