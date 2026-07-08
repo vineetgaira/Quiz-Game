@@ -46,7 +46,7 @@ def get_difficulty_level():
     
 
 def get_questions_amount():
-    print(Fore.BLUE+"You can select a amount of questions between 5-50.")
+    print(Fore.BLUE+"\nYou can select a amount of questions between 5-50.")
     while True:
         try:
             give_amount=int(input(Fore.BLUE+"Please enter a amount of questions between 5-50:"))
@@ -57,9 +57,9 @@ def get_questions_amount():
         except ValueError:
             print(Fore.RED+"Pleae enter a number between 5-50.")
 
-def url_modifier(amount,category,level,type):
+def url_modifier(amount,category,level,question_type):
     
-    url = f"https://opentdb.com/api.php?amount={amount}&category={CATEGORIES[category]}&difficulty={DIFFICULTY_LEVELS[level]}&type={TYPE[type]}"
+    url = f"https://opentdb.com/api.php?amount={amount}&category={CATEGORIES[category]}&difficulty={DIFFICULTY_LEVELS[level]}&type={TYPE[question_type]}"
 
     return url 
 
@@ -72,9 +72,10 @@ def display_questions(url):
         data = response.json()
     except requests.exceptions.RequestException as e:
         print(Fore.RED+f"Error: {e}")
+        return 0
 
     questions = data["results"]
-
+    
     if not questions:
         print(Fore.RED+"No questions were found please try a different setting.")
         return 0
@@ -103,7 +104,7 @@ def get_user_answer(options, correct_answer):
     valid_choices={1,2,3,4}
     while True:
         try:
-            choice=int(input(Fore.LIGHTBLUE_EX+"Enter your choice:"))
+            choice=int(input(Fore.LIGHTBLUE_EX+"\nEnter your choice:"))
             if choice in valid_choices:
                 if options[choice-1]==correct_answer:
                     return True
@@ -119,11 +120,11 @@ def play_quiz():
         multiple_categories()
         category=get_category()
         type_questions()
-        type=get_type()
+        question_type=get_type()
         difficulty_level()
         level=get_difficulty_level()
         amount=get_questions_amount()
-        url=url_modifier(amount,category,level,type)
+        url=url_modifier(amount,category,level,question_type)
         score=display_questions(url)
         print(Fore.LIGHTGREEN_EX+f"Your score is {score}/{amount}")
         while True:

@@ -31,12 +31,12 @@ def multiple_categories():
             )
 
 def difficulty_level():
-    print(Fore.BLUE+"Difficulty levels...\n"
+    print(Fore.BLUE+"\nDifficulty levels...\n"
           "1 : Easy\n"
           "2 : Medium\n"
           "3 : Hard")
     
 def type_questions():
-    print(Fore.BLUE+"Type of question...\n" \
+    print(Fore.BLUE+"\nType of question...\n" \
           "1 : Multiple Choice\n" \
           "2 : True or False")
