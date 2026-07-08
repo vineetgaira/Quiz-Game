@@ -10,9 +10,54 @@ from display_functions import multiple_categories, difficulty_level, type_questi
 
 URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=boolean"
 
+def get_category():
+    while True:
+        try:
+            get_category=int(input("Please select a category :"))
+            if get_category in range(1,25):
+                return get_category
+            else:
+                print("Please select a valid option..")
+        except ValueError:
+            print("Pleae enter a valid option between 1-24.")
+
+def get_type():
+    valid_choices={1,2}
+    while True:
+        try:
+            get_type=int(input("Please select a type :"))
+            if get_type in valid_choices:
+                return get_type
+            else:
+                print("Please enter a valid option.")
+        except ValueError:
+            print("Pleae enter a number between 1-3.")
+
+
+def get_difficulty_level():
+    valid_choices={1,2,3}
+    while True:
+        try:
+            get_level=int(input("Please select a difficulty level:"))
+            if get_level in valid_choices:
+                return get_level
+            else:
+                print("Please enter a valid option.")
+        except ValueError:
+            print("Pleae enter a number between 1-3.")
+    
 
 def questions_amount():
-    pass
+    print("You can select a amount of questions between 5-50.")
+    while True:
+        try:
+            give_amount=int(input("Please enter a amount of questions between 5-50:"))
+            if give_amount in range(5,51):
+                return give_amount
+            else:
+                print("Please enter a number between 5-50.")
+        except ValueError:
+            print("Pleae enter a number between 5-50.")
 
 def display_questions():
     
@@ -57,9 +102,6 @@ def get_user_answer(options, correct_answer):
 
 def play_quiz():
     while True:
-        multiple_categories()
-        type_questions()
-        difficulty_level()
         score=display_questions()
         print(Fore.LIGHTGREEN_EX+f"Your score is {score}/10")
         while True:
