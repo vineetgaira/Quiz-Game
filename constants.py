@@ -31,3 +31,6 @@ DIFFICULTY_LEVELS={1: "easy",
 
 TYPE={1: "multiple",
       2: "boolean"}
+
+MAX_QUESTIONS=51
+MIN_QUESTIONS=5

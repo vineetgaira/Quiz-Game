@@ -4,7 +4,7 @@ import html
 import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
-from constants import CATEGORIES, TYPE, DIFFICULTY_LEVELS
+from constants import CATEGORIES, TYPE, DIFFICULTY_LEVELS, MAX_QUESTIONS, MIN_QUESTIONS
 from display_functions import multiple_categories, difficulty_level, type_questions
 
 
@@ -49,13 +49,13 @@ def get_questions_amount():
     print(Fore.BLUE+"\nYou can select a amount of questions between 5-50.")
     while True:
         try:
-            give_amount=int(input(Fore.BLUE+"Please enter a amount of questions between 5-50:"))
-            if give_amount in range(5,51):
+            give_amount=int(input(Fore.BLUE+F"Please enter a amount of questions between {MIN_QUESTIONS}-{MAX_QUESTIONS-1}:"))
+            if give_amount in range(MIN_QUESTIONS,MAX_QUESTIONS):
                 return give_amount
             else:
-                print(Fore.RED+"Please enter a number between 5-50.")
+                print(Fore.RED+F"Please enter a number between {MIN_QUESTIONS}-{MAX_QUESTIONS-1}")
         except ValueError:
-            print(Fore.RED+"Pleae enter a number between 5-50.")
+            print(Fore.RED+f"Pleae enter a number between {MIN_QUESTIONS}-{MAX_QUESTIONS-1}.")
 
 def create_url(amount,category,level,question_type):
     
