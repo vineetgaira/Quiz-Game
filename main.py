@@ -57,7 +57,7 @@ def get_questions_amount():
         except ValueError:
             print(Fore.RED+"Pleae enter a number between 5-50.")
 
-def url_modifier(amount,category,level,question_type):
+def create_url(amount,category,level,question_type):
     
     url = f"https://opentdb.com/api.php?amount={amount}&category={CATEGORIES[category]}&difficulty={DIFFICULTY_LEVELS[level]}&type={TYPE[question_type]}"
 
@@ -96,6 +96,7 @@ def display_questions(url):
         if get_user_answer(options,question['correct_answer']):
             score+=1 
             print(Fore.LIGHTGREEN_EX+"Correct!")
+            print("-"*40)
         else:
             print(Fore.RED+f"Wrong! the correct answer was {Fore.LIGHTGREEN_EX+html.unescape(question['correct_answer'])}")
     return score
@@ -124,7 +125,7 @@ def play_quiz():
         difficulty_level()
         level=get_difficulty_level()
         amount=get_questions_amount()
-        url=url_modifier(amount,category,level,question_type)
+        url=create_url(amount,category,level,question_type)
         score=display_questions(url)
         print(Fore.LIGHTGREEN_EX+f"Your score is {score}/{amount}")
         while True:
