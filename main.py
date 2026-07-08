@@ -6,7 +6,7 @@ from colorama import Fore
 colorama.init(autoreset=True)
 
 
-URL = "https://opentdb.com/api.php?amount=11&category=9&difficulty=hard&type=multiple"
+URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
 
 
 
@@ -65,7 +65,7 @@ def display_result():
 def play_quiz():
     while True:
         score=display_questions()
-        print(Fore.LIGHTGREEN_EX+f"Your score is {score}/11")
+        print(Fore.LIGHTGREEN_EX+f"Your score is {score}/10")
         while True:
             user_exit=input(Fore.LIGHTBLUE_EX+"Do you wanna play another round(y/n):").lower()
             if user_exit=="y":
@@ -78,4 +78,5 @@ def play_quiz():
                 continue
     
 if __name__=="__main__":
+    
     play_quiz()
