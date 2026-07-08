@@ -24,3 +24,10 @@ CATEGORIES = {
     23: 31,
     24: 32
 }
+
+DIFFICULTY={1: "easy",
+            2: "medium",
+            3: "hard"}
+
+TYPE={1: "multiple",
+      2: "boolean"}
