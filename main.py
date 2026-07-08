@@ -9,12 +9,13 @@ colorama.init(autoreset=True)
 URL = "https://opentdb.com/api.php?amount=11&category=9&difficulty=hard&type=multiple"
 
 
-RESPONSE = requests.get(URL)
-DATA = RESPONSE.json()
 
-QUESTION = DATA["results"]
 
-def display_questions(questions):
+def display_questions():
+    
+    response  = requests.get(URL)
+    data = response.json()
+    questions = data["results"]
     score=0
     for number,question in enumerate(questions,start=1):
         print(Fore.LIGHTBLUE_EX+f"\nQuestion {number}/{len(questions)}")
@@ -63,7 +64,7 @@ def display_result():
 
 def play_quiz():
     while True:
-        score=display_questions(QUESTION)
+        score=display_questions()
         print(Fore.LIGHTGREEN_EX+f"Your score is {score}/11")
         while True:
             user_exit=input(Fore.LIGHTBLUE_EX+"Do you wanna play another round(y/n):").lower()
