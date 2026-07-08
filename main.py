@@ -8,7 +8,6 @@ from constants import CATEGORIES, TYPE, DIFFICULTY_LEVELS
 from display_functions import multiple_categories, difficulty_level, type_questions
 
 
-URL = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=boolean"
 
 def get_category():
     while True:
@@ -47,7 +46,7 @@ def get_difficulty_level():
             print("Pleae enter a number between 1-3.")
     
 
-def questions_amount():
+def get_questions_amount():
     print("You can select a amount of questions between 5-50.")
     while True:
         try:
@@ -59,9 +58,16 @@ def questions_amount():
         except ValueError:
             print("Pleae enter a number between 5-50.")
 
-def display_questions():
+def url_modifier(amount,category,level,type):
     
-    response  = requests.get(URL)
+    url = f"https://opentdb.com/api.php?amount={amount}&category={CATEGORIES[category]}&difficulty={DIFFICULTY_LEVELS[level]}&type={TYPE[type]}"
+
+    return url 
+
+
+def display_questions(url):
+    
+    response  = requests.get(url)
     data = response.json()
     questions = data["results"]
     score=0
@@ -102,8 +108,16 @@ def get_user_answer(options, correct_answer):
 
 def play_quiz():
     while True:
-        score=display_questions()
-        print(Fore.LIGHTGREEN_EX+f"Your score is {score}/10")
+        multiple_categories()
+        category=get_category()
+        type_questions()
+        type=get_type()
+        difficulty_level()
+        level=get_difficulty_level()
+        amount=get_questions_amount()
+        url=url_modifier(amount,category,level,type)
+        score=display_questions(url)
+        print(Fore.LIGHTGREEN_EX+f"Your score is {score}/{amount}")
         while True:
             user_exit=input(Fore.LIGHTBLUE_EX+"Do you wanna play another round(y/n):").lower()
             if user_exit=="y":
