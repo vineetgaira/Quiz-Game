@@ -7,6 +7,7 @@ colorama.init(autoreset=True)
 from constants import CATEGORIES, TYPE, DIFFICULTY_LEVELS
 from display_functions import multiple_categories, difficulty_level, type_questions
 from input_functions import get_category,get_difficulty_level,get_questions_amount,get_type
+from utils import clear_screen
 
 
 
@@ -73,12 +74,16 @@ def play_quiz():
     while True:
         multiple_categories()
         category=get_category()
+        clear_screen()
         type_questions()
         question_type=get_type()
+        clear_screen()
         difficulty_level()
         level=get_difficulty_level()
+        clear_screen()
         amount=get_questions_amount()
         url=create_url(amount,category,level,question_type)
+        clear_screen()
         score=display_questions(url)
         percentage=score/amount*100
         if percentage>=90:
